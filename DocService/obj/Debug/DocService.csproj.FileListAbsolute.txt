@@ -1,0 +1,62 @@
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\DocService.exe.config
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\DocService.exe
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\DocService.pdb
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\obj\Debug\DocService.csproj.AssemblyReference.cache
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\obj\Debug\DocService.csproj.SuggestedBindingRedirects.cache
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\obj\Debug\DocService.ProjectInstaller.resources
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\obj\Debug\DocService.csproj.GenerateResource.cache
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\obj\Debug\DocService.csproj.CoreCompileInputs.cache
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\obj\Debug\DocService.exe
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\obj\Debug\DocService.pdb
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\Microsoft.Win32.TaskScheduler.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\Microsoft.Win32.TaskScheduler.xml
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\de\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\es\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\fr\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\it\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\pl\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\ru\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\zh-CN\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\bin\Debug\zh-Hant\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocService\DocService\obj\Debug\DocService.csproj.CopyComplete
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\DocService.exe.config
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\DocService.exe
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\DocService.pdb
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\Microsoft.Win32.TaskScheduler.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\Microsoft.Win32.TaskScheduler.xml
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\de\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\es\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\fr\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\it\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\pl\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\ru\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\zh-CN\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\zh-Hant\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.csproj.AssemblyReference.cache
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.csproj.SuggestedBindingRedirects.cache
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.ProjectInstaller.resources
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.csproj.GenerateResource.cache
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.csproj.CoreCompileInputs.cache
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.csproj.CopyComplete
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.exe
+C:\Users\awais\OneDrive\Desktop\DMS Project Docs\DocumentProject\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.pdb
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\DocService.exe.config
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\DocService.exe
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\DocService.pdb
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\Microsoft.Win32.TaskScheduler.dll
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\Microsoft.Win32.TaskScheduler.xml
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\de\Microsoft.Win32.TaskScheduler.resources.dll
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\es\Microsoft.Win32.TaskScheduler.resources.dll
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\fr\Microsoft.Win32.TaskScheduler.resources.dll
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\it\Microsoft.Win32.TaskScheduler.resources.dll
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\pl\Microsoft.Win32.TaskScheduler.resources.dll
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\ru\Microsoft.Win32.TaskScheduler.resources.dll
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\zh-CN\Microsoft.Win32.TaskScheduler.resources.dll
+E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\zh-Hant\Microsoft.Win32.TaskScheduler.resources.dll
+E:\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.csproj.AssemblyReference.cache
+E:\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.ProjectInstaller.resources
+E:\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.csproj.GenerateResource.cache
+E:\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.csproj.CoreCompileInputs.cache
+E:\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.csproj.CopyComplete
+E:\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.exe
+E:\local_document_handler\Dot_Net\DocService\DocService\obj\Debug\DocService.pdb
