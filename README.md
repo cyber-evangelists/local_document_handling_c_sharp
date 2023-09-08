@@ -2,23 +2,22 @@ Window Service Installation Steps
 Follow these steps to install a Windows service:
 
 Step 1: Get the Latest Project
-
 Ensure you have the latest version of the Windows Service project you want to install.
+
 Step 2: Build the Project
-
 Build the Windows Service project to generate the necessary binaries.
+
 Step 3: Locate the Service Executable
-
 Check for the .exe file in the bin/Debug folder of your project. You'll need this file for installation.
-Step 4: Open Command Prompt as Administrator
 
+Step 4: Open Command Prompt as Administrator
 Navigate to "C:\Windows\Microsoft.NET\Framework\v4.0.30319" in File Explorer.
 Right-click on "Command Prompt" and select "Run as administrator" to open an elevated Command Prompt.
 
 Step 5: Install the Windows Service
-
 In the Command Prompt, run the following command:
   installutil -i "Path_to_Your_WindowService_EXE"
+
 
 Replace "Path_to_Your_WindowService_EXE" with the actual path to your service executable.
 Step 6: Verify Service Installation
