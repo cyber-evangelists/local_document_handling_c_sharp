@@ -16,7 +16,7 @@ Right-click on "Command Prompt" and select "Run as administrator" to open an ele
 
 Step 5: Install the Windows Service
 In the Command Prompt, run the following command:
-  installutil -i "Path_to_Your_WindowService_EXE"
+ `** installutil -i "Path_to_Your_WindowService_EXE"**`
 
 
 Replace "Path_to_Your_WindowService_EXE" with the actual path to your service executable.
