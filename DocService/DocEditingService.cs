@@ -83,10 +83,10 @@ namespace DocService
                             {
                                 LogMessage($"An error occurred: {ex.Message}", EventLogEntryType.Error);
                             }
-                            finally
-                            {
-                                _fileWatcher.Dispose();
-                            }
+                            //finally
+                            //{
+                            //    _fileWatcher.Dispose();
+                            //}
                         }
                         else
                         {
@@ -138,7 +138,7 @@ namespace DocService
                     string fileExtension = System.IO.Path.GetExtension(fullPath).ToLower();
 
                     // Check if Word is the default application for the file extension
-                    if (fileExtension.Contains(".docx"))
+                    if (IsWordDefaultForExtension(fileExtension))
                     {
                         taskDefinition.Actions.Add(new ExecAction(fullPath, "winword.exe"));
                     }
@@ -198,7 +198,7 @@ namespace DocService
             try
             {
                 FileInfo file = new FileInfo(e.FullPath);
-                if (!file.Name.Contains(".crdownload") /*|| !file.Name.Contains(".tmp")*/)
+                if (!file.Name.Contains("crdownload"))
                 {
                     DownloadedFileName = file.Name;
                     ProcessRequest();
@@ -294,19 +294,34 @@ namespace DocService
         {
             try
             {
-                LogMessage("Save Process started", EventLogEntryType.Error);
+                LogMessage("Save Process started", EventLogEntryType.Information);
 
                 if (File.Exists(documentPath))
                 {
-                    LogMessage("API Process started", EventLogEntryType.Error);
+                    string[] charArray = DownloadedFileName.Split('_');
+                    string actualFileName = string.Empty;
+                    try
+                    {
+                        actualFileName = charArray[charArray.Length - 1].ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        LogMessage("InValide File Name", EventLogEntryType.Error);
+                    }
+
+                    DownloadedFileName = DownloadedFileName.Replace("_", "/");
+
+
+                    LogMessage("API Process started", EventLogEntryType.Information);
 
                     using (var formData = new MultipartFormDataContent())
                     {
                         using (FileStream fileStream = new FileStream(documentPath, FileMode.Open))
                         {
-                            formData.Add(new StreamContent(fileStream), "file", Path.GetFileName(documentPath));
+                            formData.Add(new StreamContent(fileStream), "file", actualFileName);
                             formData.Add(new StringContent("admin"), "username");
                             formData.Add(new StringContent("admin"), "password");
+                            formData.Add(new StringContent(DownloadedFileName), "file_path");
 
                             HttpResponseMessage response = await _httpClient.PostAsync(BaseURL.UploadFile, formData);
                             string responseBody = await response.Content.ReadAsStringAsync();
@@ -324,7 +339,6 @@ namespace DocService
                         }
                     }
                 }
-                LogMessage("File Not found", EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
