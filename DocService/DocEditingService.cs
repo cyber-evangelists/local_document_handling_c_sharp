@@ -76,33 +76,33 @@ namespace DocService
                                     WaitForDocumentClose(fullPath, isProcessStart);
                                 }
                                 SaveDocument(fullPath, DownloadedFileName);
-                                LogMessage("File Edit Sccuessfully", EventLogEntryType.Error);
+                                LogMessage("File Edit Sccuessfully", EventLogEntryType.Information);
                             }
 
                             catch (Exception ex)
                             {
                                 LogMessage($"An error occurred: {ex.Message}", EventLogEntryType.Error);
                             }
-                            //finally
-                            //{
-                            //    _fileWatcher.Dispose();
-                            //}
+                            finally
+                            {
+                                _fileWatcher.Dispose();
+                            }
                         }
                         else
                         {
-                            LogMessage($"File not found: {fullPath}", EventLogEntryType.Information);
+                            LogMessage($"File not found: {fullPath}", EventLogEntryType.Error);
                         }
                     }
                     catch (Exception ex)
                     {
-                        LogMessage($"Error in Opening File {ex.Message}", EventLogEntryType.Information);
+                        LogMessage($"Error in Opening File {ex.Message}", EventLogEntryType.Error);
                     }
 
                 }
             }
             catch (Exception ex)
             {
-                LogMessage($"Error in Opening File {ex.Message}", EventLogEntryType.Information);
+                LogMessage($"Error in Opening File {ex.Message}", EventLogEntryType.Error);
             }
         }
 
@@ -298,11 +298,13 @@ namespace DocService
 
                 if (File.Exists(documentPath))
                 {
+                    DownloadedFileName = RemoveRepeatNumbers(DownloadedFileName);
                     string[] charArray = DownloadedFileName.Split('_');
                     string actualFileName = string.Empty;
                     try
                     {
                         actualFileName = charArray[charArray.Length - 1].ToString();
+
                     }
                     catch (Exception ex)
                     {
