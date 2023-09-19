@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DocService"
   ],
-  "SelectedNode": "\\C:\\Users\\awais\\OneDrive\\Desktop\\DMS Project Docs\\NewProject",
+  "SelectedNode": "\\DocService\\DocEditingService.cs",
   "PreviewInSolutionExplorer": false
 }

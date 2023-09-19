@@ -213,3 +213,31 @@ Affected parameters are:
    i = 
    assemblypath = E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\DocService.exe
    logfile = E:\local_document_handler\Dot_Net\DocService\DocService\bin\Debug\DocService.InstallLog
+Installing assembly 'E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   i = 
+   assemblypath = E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.exe
+   logfile = E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.InstallLog
+Installing service DocumentEditService...
+Creating EventLog source DocumentEditService in log Application...
+Rolling back assembly 'E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   i = 
+   assemblypath = E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.exe
+   logfile = E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.InstallLog
+Restoring event log to previous state for source DocumentEditService.
+Installing assembly 'E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.exe
+   logfile = E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.InstallLog
+Installing service DocumentEditService...
+Service DocumentEditService has been successfully installed.
+Creating EventLog source DocumentEditService in log Application...
+Committing assembly 'E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.exe
+   logfile = E:\local_document_handling_c_sharp\DocService\bin\Debug\DocService.InstallLog

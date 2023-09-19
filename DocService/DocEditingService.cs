@@ -32,10 +32,11 @@ namespace DocService
         #region On Service start
         protected override void OnStart(string[] args)
         {
+           
             try
             {
-                LogMessage("Proccess Start Sccuessfully", EventLogEntryType.Error);
-
+                LogMessage("Proccess Start Sccuessfully", EventLogEntryType.Information);
+                _fileWatcher = new FileSystemWatcher();
                 GetDownloadAndUserName();
 
                 _fileWatcher = new FileSystemWatcher(DownloadFolderPath);
@@ -47,6 +48,43 @@ namespace DocService
             {
                 LogMessage($"Error downloading document with ID 0: {ex.ToString()}", EventLogEntryType.Error);
 
+            }
+        }
+
+        protected override void OnStop()
+        {
+            try
+            {
+                CleanupResources();
+                LogMessage("Process Stopped Successfully", EventLogEntryType.Information);
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"Error in OnStop: {ex.ToString()}", EventLogEntryType.Error);
+            }
+        }
+
+        private void CleanupResources()
+        {
+            try
+            {
+                // Release resources and cleanup
+                if (_fileWatcher != null)
+                {
+                    _fileWatcher.Dispose();
+                }
+
+
+                // Remove the task scheduler entry if it exists
+                using (TaskService taskService = new TaskService())
+                {
+                    taskService.RootFolder.DeleteTask("File Editing", false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"Error in CleanupResources: {ex.ToString()}", EventLogEntryType.Error);
             }
         }
         #endregion
@@ -72,21 +110,21 @@ namespace DocService
                                 int isProcessStart = CreateHighPriorityTask(fullPath);
                                 if (isProcessStart != 0)
                                 {
-                                    Thread.Sleep(10000);
                                     WaitForDocumentClose(fullPath, isProcessStart);
                                 }
-                                SaveDocument(fullPath, DownloadedFileName);
-                                LogMessage("File Edit Sccuessfully", EventLogEntryType.Information);
+                               SaveDocument(fullPath, DownloadedFileName);
+
                             }
 
                             catch (Exception ex)
                             {
                                 LogMessage($"An error occurred: {ex.Message}", EventLogEntryType.Error);
                             }
-                            finally
-                            {
-                                _fileWatcher.Dispose();
-                            }
+                            //finally
+                            //{
+                            //    _fileWatcher.Dispose();
+                            //}
+
                         }
                         else
                         {
@@ -133,12 +171,13 @@ namespace DocService
                     taskDefinition.Settings.StartWhenAvailable = true;
                     taskDefinition.Settings.StopIfGoingOnBatteries = false;
                     taskDefinition.Settings.Volatile = false;
+
                     taskDefinition.Settings.WakeToRun = false;
                     // Determine the file extension of the document
                     string fileExtension = System.IO.Path.GetExtension(fullPath).ToLower();
 
                     // Check if Word is the default application for the file extension
-                    if (IsWordDefaultForExtension(fileExtension))
+                    if (fileExtension.Contains(".docx"))
                     {
                         taskDefinition.Actions.Add(new ExecAction(fullPath, "winword.exe"));
                     }
@@ -198,7 +237,8 @@ namespace DocService
             try
             {
                 FileInfo file = new FileInfo(e.FullPath);
-                if (!file.Name.Contains("crdownload"))
+                LogMessage(e.Name, EventLogEntryType.Information);
+                if (!file.Name.Contains("crdownload") && !file.Name.Contains(".tmp"))
                 {
                     DownloadedFileName = file.Name;
                     ProcessRequest();
@@ -214,7 +254,7 @@ namespace DocService
         {
             try
             {
-                LogMessage("Wait Doc Proccess Start Sccuessfully", EventLogEntryType.Error);
+                LogMessage("Wait Doc Proccess Start Sccuessfully", EventLogEntryType.Information);
 
                 bool IsProcessExit = true;
                 Process currentProcess = null;
@@ -246,51 +286,10 @@ namespace DocService
             }
         }
 
-        private void OnFileChanged(object sender, FileSystemEventArgs e)
-        {
-            try
-            {
-                // If the file was closed, stop the file watcher
-                if (e.ChangeType == WatcherChangeTypes.Changed)
-                {
-                    _fileWatcher.EnableRaisingEvents = false;
-                    LogMessage($"File Edited Successfully.", EventLogEntryType.Information);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                LogMessage($"Something Went Wrong {ex.Message}.", EventLogEntryType.Error);
-
-            }
-        }
-
-        private void OnFileChanged(object sender, RenamedEventArgs e)
-        {
-            try
-            {
-
-                LogMessage($"File Edited Successfully.", EventLogEntryType.Information);
-
-                // If the file was closed, stop the file watcher
-                if (e.ChangeType == WatcherChangeTypes.Changed)
-                {
-                    _fileWatcher.EnableRaisingEvents = false;
-                    LogMessage($"File Edited Successfully.", EventLogEntryType.Information);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                LogMessage($"Something Went Wrong {ex.Message}.", EventLogEntryType.Error);
-
-            }
-        }
-
         #endregion
 
         #region SQL Queries
-        private async void SaveDocument(string documentPath, string fileName)
+        private  async void  SaveDocument(string documentPath, string fileName)
         {
             try
             {
@@ -330,8 +329,8 @@ namespace DocService
 
                             if (response.IsSuccessStatusCode)
                             {
-                                LogMessage(responseBody, EventLogEntryType.Error);
-
+                                LogMessage(responseBody, EventLogEntryType.Information);
+                                LogMessage("File Edit Sccuessfully", EventLogEntryType.Information);
                             }
                             else
                             {
@@ -341,10 +340,13 @@ namespace DocService
                         }
                     }
                 }
+             
             }
             catch (Exception ex)
             {
                 LogMessage(ex.Message, EventLogEntryType.Error);
+              
+
             }
         }
 
