@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32.TaskScheduler;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -23,6 +23,8 @@ namespace DocService
         private string DomnainAndUserName = string.Empty;
 
         private FileSystemWatcher _fileWatcher;
+        private List<string> openDocuments = new List<string>();
+
 
         public DocEditingService()
         {
@@ -32,7 +34,7 @@ namespace DocService
         #region On Service start
         protected override void OnStart(string[] args)
         {
-           
+
             try
             {
                 LogMessage("Proccess Start Sccuessfully", EventLogEntryType.Information);
@@ -110,20 +112,25 @@ namespace DocService
                                 int isProcessStart = CreateHighPriorityTask(fullPath);
                                 if (isProcessStart != 0)
                                 {
+                                    // Add the document to the list of open documents.
+                                    openDocuments.Add(DownloadedFileName);
                                     WaitForDocumentClose(fullPath, isProcessStart);
                                 }
-                               SaveDocument(fullPath, DownloadedFileName);
+                                SaveDocument(fullPath, DownloadedFileName);
 
                             }
-
                             catch (Exception ex)
                             {
                                 LogMessage($"An error occurred: {ex.Message}", EventLogEntryType.Error);
                             }
-                            //finally
-                            //{
-                            //    _fileWatcher.Dispose();
-                            //}
+                            finally
+                            {
+                                // Remove the document from the list of open documents when it's closed.
+                                lock (openDocuments)
+                                {
+                                    openDocuments.Remove(DownloadedFileName);
+                                }
+                            }
 
                         }
                         else
@@ -237,11 +244,17 @@ namespace DocService
             try
             {
                 FileInfo file = new FileInfo(e.FullPath);
-                LogMessage(e.Name, EventLogEntryType.Information);
                 if (!file.Name.Contains("crdownload") && !file.Name.Contains(".tmp"))
                 {
-                    DownloadedFileName = file.Name;
-                    ProcessRequest();
+                    if (!IsDocumentOpen(file.Name))
+                    {
+                        DownloadedFileName = file.Name;
+                        ProcessRequest();
+                    }
+                    else
+                    {
+                        LogMessage($"Document is already open", EventLogEntryType.Information);
+                    }
                 }
             }
             catch (Exception ex)
@@ -257,7 +270,6 @@ namespace DocService
                 LogMessage("Wait Doc Proccess Start Sccuessfully", EventLogEntryType.Information);
 
                 bool IsProcessExit = true;
-                Process currentProcess = null;
                 while (IsProcessExit)
                 {
                     Thread.Sleep(5000);
@@ -269,13 +281,14 @@ namespace DocService
                             if (processes.Count == 0)
                             {
                                 IsProcessExit = false;
+                                LogMessage("Document closed successfully", EventLogEntryType.Information);
                                 break;
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        LogMessage("Doc closed Sccuessfully", EventLogEntryType.Error);
+                        LogMessage($"Error while checking if the document is closed: {ex.Message}", EventLogEntryType.Error);
                     }
                 }
             }
@@ -289,7 +302,7 @@ namespace DocService
         #endregion
 
         #region SQL Queries
-        private  async void  SaveDocument(string documentPath, string fileName)
+        private async void SaveDocument(string documentPath, string fileName)
         {
             try
             {
@@ -340,12 +353,12 @@ namespace DocService
                         }
                     }
                 }
-             
+
             }
             catch (Exception ex)
             {
                 LogMessage(ex.Message, EventLogEntryType.Error);
-              
+
 
             }
         }
@@ -374,6 +387,22 @@ namespace DocService
 
             }
         }
+
+        // Add a method to check if a document is open.
+        private bool IsDocumentOpen(string documentname)
+        {
+            try
+            {
+                // Check if the document is in the list of open documents.
+                return openDocuments.Contains(documentname);
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"Error in IsDocumentOpen: {ex.Message}", EventLogEntryType.Error);
+                return false;
+            }
+        }
+
         #endregion
 
         #region Logging
