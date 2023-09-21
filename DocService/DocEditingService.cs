@@ -53,6 +53,41 @@ namespace DocService
             }
         }
 
+        private void OnRenamed(object source, RenamedEventArgs e)
+        {
+            try
+            {
+                FileInfo file = new FileInfo(e.FullPath);
+                if (!file.Name.Contains("crdownload") && !file.Name.Contains(".tmp"))
+                {
+                    if (!IsDocumentOpen(file.Name))
+                    {
+                        Thread.Sleep(5000);
+                        DownloadedFileName = file.Name;
+                        ProcessRequest();
+                    }
+                    else
+                    {
+                        LogMessage($"Document is already open", EventLogEntryType.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"Error {ex.Message}", EventLogEntryType.Error);
+            }
+        }
+
+
+        private void OnFileCreated(object sender, FileSystemEventArgs e)
+        {
+            if (e.ChangeType == WatcherChangeTypes.Created)
+            {
+                Thread.Sleep(3000);
+                ProcessRequest();
+            }
+        }
+
         protected override void OnStop()
         {
             try
@@ -182,17 +217,9 @@ namespace DocService
                     taskDefinition.Settings.WakeToRun = false;
                     // Determine the file extension of the document
                     string fileExtension = System.IO.Path.GetExtension(fullPath).ToLower();
+                    taskDefinition.Actions.Add(new ExecAction(fullPath));
 
-                    // Check if Word is the default application for the file extension
-                    if (fileExtension.Contains(".docx"))
-                    {
-                        taskDefinition.Actions.Add(new ExecAction(fullPath, "winword.exe"));
-                    }
-                    else
-                    {
-                        taskDefinition.Actions.Add(new ExecAction(fullPath, "notepad.exe"));
-                    }
-
+                    
 
                     const string taskName = "File Editing";
                     taskService.RootFolder.RegisterTaskDefinition(taskName, taskDefinition);
@@ -239,29 +266,6 @@ namespace DocService
         #endregion
 
         #region File Watcher things
-        private void OnRenamed(object source, RenamedEventArgs e)
-        {
-            try
-            {
-                FileInfo file = new FileInfo(e.FullPath);
-                if (!file.Name.Contains("crdownload") && !file.Name.Contains(".tmp"))
-                {
-                    if (!IsDocumentOpen(file.Name))
-                    {
-                        DownloadedFileName = file.Name;
-                        ProcessRequest();
-                    }
-                    else
-                    {
-                        LogMessage($"Document is already open", EventLogEntryType.Information);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogMessage($"Error {ex.Message}", EventLogEntryType.Error);
-            }
-        }
 
         private void WaitForDocumentClose(string documentPath, int processId)
         {
@@ -344,11 +348,12 @@ namespace DocService
                             {
                                 LogMessage(responseBody, EventLogEntryType.Information);
                                 LogMessage("File Edit Sccuessfully", EventLogEntryType.Information);
+                                File.Delete(documentPath); // If the file upload sccessfully than delete the file if there is any error occures it will repon again
                             }
                             else
                             {
                                 LogMessage(responseBody, EventLogEntryType.Error);
-
+                                //File.Delete(documentPath);
                             }
                         }
                     }
