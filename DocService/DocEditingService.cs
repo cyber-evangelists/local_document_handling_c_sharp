@@ -58,13 +58,21 @@ namespace DocService
             try
             {
                 FileInfo file = new FileInfo(e.FullPath);
-                if (!file.Name.Contains("crdownload") && !file.Name.Contains(".tmp"))
+
+                if (!file.Name.Contains("crdownload") || !file.Name.Contains(".tmp"))
                 {
+                    LogMessage($"Document is already open", EventLogEntryType.Information);
+
                     if (!IsDocumentOpen(file.Name))
                     {
-                        Thread.Sleep(5000);
-                        DownloadedFileName = file.Name;
-                        ProcessRequest();
+                        if (file.Name.Contains("LFH;"))
+                        {
+                            Thread.Sleep(5000);
+                            DownloadedFileName = file.Name;
+                            ProcessRequest();
+                            LogMessage($"Document is already open", EventLogEntryType.Information);
+
+                        }
                     }
                     else
                     {
@@ -150,8 +158,9 @@ namespace DocService
                                     // Add the document to the list of open documents.
                                     openDocuments.Add(DownloadedFileName);
                                     WaitForDocumentClose(fullPath, isProcessStart);
+                                    SaveDocument(fullPath, DownloadedFileName);
+
                                 }
-                                SaveDocument(fullPath, DownloadedFileName);
 
                             }
                             catch (Exception ex)
@@ -215,14 +224,11 @@ namespace DocService
                     taskDefinition.Settings.Volatile = false;
 
                     taskDefinition.Settings.WakeToRun = false;
-                    // Determine the file extension of the document
-                    string fileExtension = System.IO.Path.GetExtension(fullPath).ToLower();
                     taskDefinition.Actions.Add(new ExecAction(fullPath));
-
-                    
 
                     const string taskName = "File Editing";
                     taskService.RootFolder.RegisterTaskDefinition(taskName, taskDefinition);
+
 
                     var task = taskService.FindTask(taskName).Run();
                     int i = (int)task.EnginePID;
@@ -314,6 +320,7 @@ namespace DocService
 
                 if (File.Exists(documentPath))
                 {
+                    DownloadedFileName = DownloadedFileName.Replace("LFH;", "");
                     DownloadedFileName = RemoveRepeatNumbers(DownloadedFileName);
                     string[] charArray = DownloadedFileName.Split('_');
                     string actualFileName = string.Empty;
